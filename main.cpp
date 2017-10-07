@@ -219,7 +219,7 @@ void sprawdz_dane_z_pamieci_i_polacz()
     Serial.print ( "IP address: " );
     Serial.println ( WiFi.localIP() );
 
-    server.on("/", zresetuj_ustawienia_sieci);
+    server.on("/", handleRoot);
     server.on("/reset", zresetuj_ustawienia_sieci);
     server.begin();
   }
@@ -230,7 +230,6 @@ void sprawdz_dane_z_pamieci_i_polacz()
 void setup()
 {
 	delay(1000);
-  //zresetuj_ustawienia_sieci();
 	Serial.begin(115200);
 	// ustawienia pinu resetu
 	pinMode(BUTTON_RESET_PIN, INPUT_PULLUP);
@@ -242,8 +241,7 @@ unsigned long t1_current = 0;
 
 unsigned int button_reset_counter = 0;
 
-const unsigned long t1_interval = 50;
-const unsigned long t2_interval = 10000;
+const unsigned long t1_interval = 200;
 
 void loop()
 {
